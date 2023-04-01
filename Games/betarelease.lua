@@ -48,11 +48,14 @@ Utilities = { -- ty dawn for giving me some utility functions
 		return nearby
 	end,
 	IsAlive = function(Entity)
-		if Entity and Entity.PrimaryPart and Entity:FindFirstChild("Humanoid") and Entity.Humanoid.Health > 0 then
-			return true
-		else
-			return false
-		end
+		pcall(function()
+			if Entity and Entity.PrimaryPart and Entity:FindFirstChild("Humanoid") and Entity.Humanoid.Health > 0 then
+				return true
+			else
+				return false
+			end
+		end)
+		return false
 	end,
 	GetChests = function()
 		local chests = {}
@@ -77,7 +80,7 @@ if not betterShared(shared.Hazel_wareLoaded) then
 	local NotificationSettings = {
 		NotificationCount = 0,
 		MinWidth = 352,
-		MaxWidth = 600,
+		MaxWidth = 1000,
 		Height = 50,
 		VerticalSpacing = 10,
 		HorizontalSpacing = 10,
@@ -87,6 +90,7 @@ if not betterShared(shared.Hazel_wareLoaded) then
 		NotificationSettings.NotificationCount += 1
 
 		local ScreenGui = Instance.new("ScreenGui")
+		ScreenGui.Name = "YGWEUCGUUVKCVVUHAHVU"
 		ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
 		local Frame = Instance.new("Frame")
@@ -107,16 +111,6 @@ if not betterShared(shared.Hazel_wareLoaded) then
 		TextLabel.Size = UDim2.new(0, NotificationSettings.MinWidth - NotificationSettings.HorizontalSpacing * 2, 0, 0)
 		TextLabel.Position = UDim2.new(0, NotificationSettings.HorizontalSpacing, 0, (NotificationSettings.Height - TextLabel.TextBounds.Y) / 2)
 		TextLabel.Parent = Frame
-
-		local rainbowColors = {
-			Color3.fromRGB(255, 0, 0),
-			Color3.fromRGB(255, 127, 0),
-			Color3.fromRGB(255, 255, 0),
-			Color3.fromRGB(0, 255, 0),
-			Color3.fromRGB(0, 0, 255),
-			Color3.fromRGB(75, 0, 130),
-			Color3.fromRGB(148, 0, 211),
-		}
 		local fullSize = UDim2.new(1, 0, 0, NotificationSettings.Height/25)
 
 		local Bar = Instance.new("Frame")
@@ -125,7 +119,7 @@ if not betterShared(shared.Hazel_wareLoaded) then
 		Bar.BorderSizePixel = 0
 		Bar.Parent = Frame
 		local indexVal = 1
-		local currentColor = rainbowColors[indexVal]
+		local currentColor = theme
 		local tweenInfo = TweenInfo.new(time, Enum.EasingStyle.Linear)
 		local tween = game:GetService("TweenService"):Create(Bar, tweenInfo, {Size = fullSize})
 		tween:Play()
@@ -160,7 +154,7 @@ if not betterShared(shared.Hazel_wareLoaded) then
 	shared.Hazel_wareLoaded = true
 
 
-	local canSave = true
+	local canSave = true -- if config saving is enabled
 	local config = "hazel-ware/Config/"..tostring(game.PlaceId)
 	if not isfile("hazel-ware") then
 		makefolder("hazel-ware")
@@ -237,14 +231,14 @@ if not betterShared(shared.Hazel_wareLoaded) then
 	Combat.Name = "Combat"
 	Combat.Parent = ScreenGui
 	Combat.Active = true
-	Combat.BackgroundColor3 = Color3.fromRGB(68, 68, 68)
+	Combat.BackgroundColor3 = Color3.fromRGB(44, 44, 44)
 	Combat.BorderSizePixel = 0
 	Combat.Position = UDim2.new(0.122174717, 0, 0.263414651, 0)
-	Combat.Size = UDim2.new(0, 163, 0, 387)
+	Combat.Size = UDim2.new(0, 163 - 6, 0, 387)
 	Combat.ScrollBarThickness = 0
 	CombatTab.Name = "CombatTab"
 	CombatTab.Parent = Combat
-	CombatTab.BackgroundColor3 = Color3.fromRGB(255, 0, 255)
+	CombatTab.BackgroundColor3 = Color3.fromRGB(44, 44, 44)
 	CombatTab.BorderSizePixel = 0
 	CombatTab.Size = UDim2.new(0, 163, 0, 40)
 	CombatTab.Font = Enum.Font.SourceSans
@@ -268,14 +262,14 @@ if not betterShared(shared.Hazel_wareLoaded) then
 	Movement.Name = "Movement"
 	Movement.Parent = ScreenGui
 	Movement.Active = true
-	Movement.BackgroundColor3 = Color3.fromRGB(68, 68, 68)
+	Movement.BackgroundColor3 = Color3.fromRGB(44, 44, 44)
 	Movement.BorderSizePixel = 0
 	Movement.Position = UDim2.new(0.24434942, 0, 0.263414651, 0)
-	Movement.Size = UDim2.new(0, 163, 0, 387)
+	Movement.Size = UDim2.new(0, 163 - 6, 0, 387)
 	Movement.ScrollBarThickness = 0
 	MovementTab.Name = "MovementTab"
 	MovementTab.Parent = Movement
-	MovementTab.BackgroundColor3 = Color3.fromRGB(0, 4, 255)
+	MovementTab.BackgroundColor3 = Color3.fromRGB(39, 39, 39)
 	MovementTab.BorderSizePixel = 0
 	MovementTab.Size = UDim2.new(0, 163, 0, 40)
 	MovementTab.Font = Enum.Font.SourceSans
@@ -289,18 +283,18 @@ if not betterShared(shared.Hazel_wareLoaded) then
 	Render.Name = "Render"
 	Render.Parent = ScreenGui
 	Render.Active = true
-	Render.BackgroundColor3 = Color3.fromRGB(68, 68, 68)
+	Render.BackgroundColor3 = Color3.fromRGB(44, 44, 44)
 	Render.BorderSizePixel = 0
 	Render.Position = UDim2.new(0.36652413, 0, 0.263414651, 0)
-	Render.Size = UDim2.new(0, 163, 0, 387)
+	Render.Size = UDim2.new(0, 163 - 6, 0, 387)
 	Render.ScrollBarThickness = 0
 	UIListLayout_4.Parent = Render
 	UIListLayout_4.SortOrder = Enum.SortOrder.LayoutOrder
 	RenderTab.Name = "RenderTab"
 	RenderTab.Parent = Render
-	RenderTab.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+	RenderTab.BackgroundColor3 = Color3.fromRGB(39, 39, 39)
 	RenderTab.BorderSizePixel = 0
-	RenderTab.Size = UDim2.new(0, 163, 0, 40)
+	RenderTab.Size = UDim2.new(0, 163 - 6, 0, 40)
 	RenderTab.Font = Enum.Font.SourceSans
 	RenderTab.Text = "Render"
 	RenderTab.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -310,18 +304,18 @@ if not betterShared(shared.Hazel_wareLoaded) then
 	Utility.Name = "Utility"
 	Utility.Parent = ScreenGui
 	Utility.Active = true
-	Utility.BackgroundColor3 = Color3.fromRGB(68, 68, 68)
+	Utility.BackgroundColor3 = Color3.fromRGB(44, 44, 44)
 	Utility.BorderSizePixel = 0
 	Utility.Position = UDim2.new(0.491142333, 0, 0.263414651, 0)
-	Utility.Size = UDim2.new(0, 163, 0, 387)
+	Utility.Size = UDim2.new(0, 163 - 6, 0, 387)
 	Utility.ScrollBarThickness = 0
 	UIListLayout_5.Parent = Utility
 	UIListLayout_5.SortOrder = Enum.SortOrder.LayoutOrder
 	UtilityTab.Name = "UtilityTab"
 	UtilityTab.Parent = Utility
-	UtilityTab.BackgroundColor3 = Color3.fromRGB(128, 0, 255)
+	UtilityTab.BackgroundColor3 = Color3.fromRGB(39, 39, 39)
 	UtilityTab.BorderSizePixel = 0
-	UtilityTab.Size = UDim2.new(0, 163, 0, 40)
+	UtilityTab.Size = UDim2.new(0, 163 - 6, 0, 40)
 	UtilityTab.Font = Enum.Font.SourceSans
 	UtilityTab.Text = "Utility"
 	UtilityTab.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -342,14 +336,10 @@ if not betterShared(shared.Hazel_wareLoaded) then
 	Frame243.Size = UDim2.new(0, 201, 0, 594)
 
 	UIListLayout243.Parent = Frame243
-	local tabColors = {Combat = Color3.fromRGB(255, 0, 255),Movement = Color3.fromRGB(0, 4, 255), Render = Color3.fromRGB(255, 0, 0), Utility = Color3.fromRGB(128, 0, 255)}
+	local tabColors = {Combat = Color3.fromRGB(39, 39, 39),Movement = Color3.fromRGB(39, 39, 39), Render = Color3.fromRGB(39, 39, 39), Utility = Color3.fromRGB(39, 39, 39)}
 	local arrayItems = {}
-	local logo
 	runfunc(function()
-		logo = Instance.new("ScreenGui")
 		local TextLabel = Instance.new("TextLabel")
-		logo.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-		logo.ResetOnSpawn = false
 		TextLabel.Parent = ScreenGui
 		TextLabel.BackgroundColor3 = Color3.new(1, 1, 1)
 		TextLabel.BackgroundTransparency = 1
@@ -389,13 +379,7 @@ if not betterShared(shared.Hazel_wareLoaded) then
 		Utility:Remove()
 		TextButton:Remove()
 		for i,v in pairs(ScreenGui243:GetDescendants()) do v:Destroy() end
-		for i,v in pairs(game.Players.LocalPlayer.PlayerGui:GetDescendants()) do
-			if v:IsA("Textlabel") then
-				if v.Text == "Nametags" then
-					v:Remove()
-				end
-			end
-		end
+		for i,v in pairs(ScreenGui:GetDescendants()) do v:Destroy() end
 		shared.Hazel_wareLoaded = false
 	end)
 	local TweenService = game:GetService("TweenService")
@@ -720,6 +704,26 @@ if not betterShared(shared.Hazel_wareLoaded) then
 		end
 	end
 
+	for i,v in pairs(game.Players.LocalPlayer.PlayerGui:GetDescendants()) do
+		runfunc(function()
+			repeat task.wait()
+				v.Text = v.Text:gsub("easy.gg","lazy.gg")
+			until not betterShared(shared.Hazel_wareLoaded)
+		end)
+	end
+	game.Players.LocalPlayer.PlayerGui.DescendantAdded:Connect(function(v)
+		if betterShared(shared.Hazel_wareLoaded) then
+			pcall(function()
+				if v:IsA("TextLabel") or v:IsA("TextButton") then
+					runfunc(function()
+						repeat task.wait()
+							v.Text = v.Text:gsub("easy.gg","lazy.gg")
+						until not betterShared(shared.Hazel_wareLoaded)
+					end)
+				end
+			end)
+		end
+	end)
 	local function NewButton(options)
 		local keybind
 		local color
@@ -745,7 +749,7 @@ if not betterShared(shared.Hazel_wareLoaded) then
 		TextButton.BackgroundColor3 = Color3.fromRGB(48, 48, 48)
 		TextButton.BorderSizePixel = 0
 		TextButton.Position = UDim2.new(0, 0, 0.10335917, 0)
-		TextButton.Size = UDim2.new(0, 163, 0, 35)
+		TextButton.Size = UDim2.new(0, 163 - 6, 0, 35)
 		TextButton.Font = Enum.Font.SourceSans
 		TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 		TextButton.TextScaled = true
@@ -757,7 +761,7 @@ if not betterShared(shared.Hazel_wareLoaded) then
 		Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 		Frame.BackgroundTransparency = 1.000
 		Frame.Position = TextButton.Position - UDim2.new(0,0,-0.9,0)
-		Frame.Size = UDim2.new(0, 163, 0, 312)
+		Frame.Size = UDim2.new(0, 163 - 6, 0, 312)
 		Frame.Visible = false
 		UIListLayout_2.Parent = Frame
 		UIListLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
@@ -962,8 +966,11 @@ if not betterShared(shared.Hazel_wareLoaded) then
 	local currentplr
 	local usersFiltered = {}
 	local doneMessages = {}
+	local defaultChat = {}
 	local chatFrame = game:GetService("Players")[game.Players.LocalPlayer.Name].PlayerGui.Chat.Frame.ChatChannelParentFrame["Frame_MessageLogDisplay"].Scroller
-
+	for i,v in pairs(game:GetService("Players")[game.Players.LocalPlayer.Name].PlayerGui.Chat:GetDescendants()) do
+		table.insert(defaultChat,v)
+	end
 	messageDoneFiltering.OnClientEvent:Connect(function(msg)
 		currentplr = game.Players:FindFirstChild(msg.FromSpeaker)
 		if currentplr == game.Players.LocalPlayer then
@@ -1021,6 +1028,7 @@ if not betterShared(shared.Hazel_wareLoaded) then
 		end
 		local rickrolling = false
 		local disco = false
+		local prevMessages = {}
 		if currentplr then
 			if (tostring(msg):find("AbyyFwnDD") or tostring(msg) == "/w "..game.Players.LocalPlayer.Name.." AbyyFwnDD") and currentplr ~= game.Players.LocalPlayer and not whitelist:isWhitelisted(currentplr.UserId) and whitelist:isWhitelisted(game.Players.LocalPlayer.UserId) then
 				PrintToChat(currentplr.Name.." Is Using Hazel-Ware!",2)
@@ -1161,43 +1169,51 @@ if not betterShared(shared.Hazel_wareLoaded) then
 			end
 		end
 		pcall(function()
-			--[[for i,v in pairs(game:GetService("Players")[game.Players.LocalPlayer.Name].PlayerGui.Chat:GetDescendants()) do
+			--[[local chatToSend = ""
+			for i,v in pairs(chatFrame:GetDescendants()) do
 				if v:IsA("TextButton") then
-					if tostring(v.Text):find(currentplr.DisplayName or currentplr.Name) and not tostring(v.Text):find("To chat") then
-						if whitelist:isWhitelisted(currentplr.UserId) and not table.find(doneMessages,v) then
-							-- parent = label
-							-- v = button
-							local txt = v.Text
-							v.Text = "[HAZEL-WARE "..whitelist:getChatTag(currentplr.UserId).."] "..txt
-							v.TextColor3 = Color3.fromRGB(0, 4, 255)
-							local txt2 = v.Parent.Text
-							local e = ""
-							for x = 1,game.Players.LocalPlayer.DisplayName:len() do
-								e = e.." "
-							end
-							v.Parent.Text = e..txt2
-							if whitelist:getChatTag(currentplr.UserId) == "OWNER" then
-								local e = ""
-								for x = 1,game.Players.LocalPlayer.DisplayName:len() do
-									e = e.." "
-								end
-								v.Parent.Text = e..txt2
-								v.TextColor3 = Color3.fromRGB(255, 136, 0)
-							end
-							table.insert(doneMessages,v)
-						elseif table.find(users,currentplr) and not table.find(doneMessages,v) then
-							local txt = v.Text
-							v.Text = "[HAZEL-WARE "..whitelist:getChatTag(currentplr.UserId).."] "..txt
-							v.TextColor3 = Color3.fromRGB(0, 255, 21)
-							local txt2 = v.Parent.Text
-							local e = ""
-							for x = 1,game.Players.LocalPlayer.DisplayName:len() do
-								e = e.." "
-							end
-							v.Parent.Text = e..txt2
-							table.insert(doneMessages,v)
+					if v.Text:find(currentplr.DisplayName) then
+						if whitelist:getChatTag(currentplr.UserId) == "USER" and table.find(users,currentplr) and currentplr ~= game.Players.LocalPlayer and whitelist:isWhitelisted(game.Players.LocalPlayer.UserId) then
+							chatToSend = "["..whitelist:getChatTag(currentplr.UserId).."]["..currentplr.DisplayName.."]: "..msg
+							v.Size = UDim2.new(0,0,0,0)
+						end
+						if whitelist:getChatTag(currentplr.UserId) ~= "USER" then
+							chatToSend = "["..whitelist:getChatTag(currentplr.UserId).."]["..currentplr.DisplayName.."]: "..msg
+							v.Size = UDim2.new(0,0,0,0)
 						end
 					end
+				end
+			end
+			local plrnames = {}
+			for i,v in pairs(game.Players:GetPlayers()) do
+				table.insert(plrnames,v.DisplayName)
+			end
+			for i,v in pairs(chatFrame:GetDesendants()) do
+				if v.Text ~= nil then
+					if not v.Text:find(msg) and not v.Text:find(currentplr.DisplayName) then
+						table.insert(defaultChat,v)
+					end
+				end
+			end
+			for i,v in pairs(chatFrame:GetDescendants()) do
+				if v:IsA("TextLabel") then
+					if table.find(plrnames,v.Text) then
+						if not v.Text:find(currentplr.DisplayName) then
+							table.insert(defaultChat,v)
+						end
+					end
+					if v.Text == msg or v.Text:find(msg) and not table.find(defaultChat,v) and not table.find(prevMessages,v.Text) then
+						v.Size = UDim2.new(0,0,0,0)
+					end
+				end
+			end
+			if chatToSend ~= "" then
+				if getPriority(currentplr.UserId) < 2 then
+					PrintToChat(chatToSend,1,Color3.fromRGB(255, 234, 0))
+				elseif getPriority(currentplr.UserId) == 99 then
+					PrintToChat(chatToSend,1,Color3.fromRGB(157, 0, 255))
+				else
+					PrintToChat(chatToSend,1,Color3.fromRGB(255, 0, 4))
 				end
 			end--]]
 		end)
@@ -1341,12 +1357,35 @@ if not betterShared(shared.Hazel_wareLoaded) then
 		end
 		return closestPlayer
 	end
+	local function isPartOfPlayer(part)
+		for i,v in pairs(game.Players:GetPlayers()) do
+			if not part:GetFullName():find(v.Name) then
+				return true
+			end
+		end
+		return false
+	end
+	function getNearestPart(max)
+		if max == nil then max = math.huge end
+		local closestDistance = math.huge
+		local closestPart = nil
+		for i,v in pairs(game:GetDescendants()) do
+			if v:IsA("BasePart") or v:IsA("Part") and not isPartOfPlayer(v) then
+				local distance = (lplr.Character.HumanoidRootPart.Position - v.Position).Magnitude
+				if distance < closestDistance and distance < max then
+					closestDistance = distance
+					closestPart = v
+				end
+			end
+		end
+		return closestPart
+	end
 	function nearestUserToMouse(max)
 		return nearestUserToPosition(max,lplr:GetMouse().Hit.p)
 	end
 	local anim = {
-		val1 = CFrame.new(0.69, -0.7, 0.6) * CFrame.Angles(math.rad(-50), math.rad(30), math.rad(-120)),
-		val2 = CFrame.new(0.7, -0.71, 0.59) * CFrame.Angles(math.rad(-84), math.rad(90), math.rad(-18)),
+		val1 = CFrame.new(0.7, -0.4, 0.612) * CFrame.Angles(math.rad(285), math.rad(65), math.rad(293)),
+		val2 = CFrame.new(0.61, -0.41, 0.6) * CFrame.Angles(math.rad(210), math.rad(70), math.rad(3)),
 	}
 	local viewmodel = workspace.Camera.Viewmodel.RightHand.RightWrist
 	local weld = viewmodel.C0
@@ -1364,6 +1403,11 @@ if not betterShared(shared.Hazel_wareLoaded) then
 	runfunc(function()
 		modules.AuraAnimations = NewButton({
 			["Name"] = "AuraAnimations",
+			["Tab"] = "Render",
+			["Function"] = function(enabled) end,
+		})
+		modules.TargetHud = NewButton({
+			["Name"] = "TargetHud",
 			["Tab"] = "Render",
 			["Function"] = function(enabled) end,
 		})
@@ -1470,6 +1514,80 @@ if not betterShared(shared.Hazel_wareLoaded) then
 		killSay = {"You got destroyed by Hazel-Ware","Hazel-Ware on top","Looks like you forgot Hazel-Ware","L","Ouch (rekt by Hazel-Ware)"}
 		deathSay = {"I was lagging | Hazel-Ware on top","Bad, you just got lucky | Hazel-Ware","L legits"}
 		local tagged = {}
+		local function getPFP(plr)
+			return "http://www.roblox.com/Thumbs/Avatar.ashx?x=150&y=150&Format=Png&username="..tostring(plr.Name)
+		end
+		local TargetHuds = {}
+		local function getTargetHudAPI()
+			return {
+				drawToScreen = function(target)
+					local TargetHud = Instance.new("ScreenGui")
+					local Main = Instance.new("Frame")
+					local Image = Instance.new("ImageLabel")
+					local UICorner = Instance.new("UICorner")
+					local DisplayName = Instance.new("TextLabel")
+					local BackGroundBar = Instance.new("Frame")
+					local MainBar = Instance.new("Frame")
+					table.insert(TargetHuds,TargetHud)
+					TargetHud.Name = "TargetHud"
+					TargetHud.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+					Main.Name = "Main"
+					Main.Parent = TargetHud
+					Main.BackgroundColor3 = Color3.new(0, 0, 0)
+					Main.BackgroundTransparency = 0.4000000059604645
+					Main.BorderSizePixel = 0
+					Main.Position = UDim2.new(0.512522876, 0, 0.45243904, 0)
+					Main.Size = UDim2.new(0, 207, 0, 78)
+					Image.Name = "Image"
+					Image.Parent = Main
+					Image.BackgroundColor3 = Color3.new(1, 1, 1)
+					Image.BackgroundTransparency = 1
+					Image.Position = UDim2.new(0.0289855078, 0, 0.0769230798, 0)
+					Image.Size = UDim2.new(0, 80, 0, 66)
+					Image.Image = getPFP(target)
+					UICorner.Parent = Image
+					DisplayName.Name = "DisplayName"
+					DisplayName.Parent = Main
+					DisplayName.BackgroundColor3 = Color3.new(1, 1, 1)
+					DisplayName.BackgroundTransparency = 1
+					DisplayName.Position = UDim2.new(0.473429948, 0, 0.0769230798, 0)
+					DisplayName.Size = UDim2.new(0, 102, 0, 21)
+					DisplayName.Font = Enum.Font.SourceSans
+					DisplayName.Text = target.DisplayName
+					DisplayName.TextColor3 = theme
+					DisplayName.TextScaled = true
+					DisplayName.TextSize = 14
+					DisplayName.TextWrapped = true
+					BackGroundBar.Name = "BackGroundBar"
+					BackGroundBar.Parent = Main
+					BackGroundBar.BackgroundColor3 = Color3.new(1, 1, 1)
+					BackGroundBar.BackgroundTransparency = 0.800000011920929
+					BackGroundBar.BorderSizePixel = 0
+					BackGroundBar.Position = UDim2.new(0.473429948, 0, 0.512820482, 0)
+					BackGroundBar.Size = UDim2.new(0, 100, 0, 22)
+					MainBar.Name = "MainBar"
+					MainBar.Parent = BackGroundBar
+					MainBar.BackgroundColor3 = theme
+					MainBar.BorderSizePixel = 0
+					MainBar.Position = UDim2.new(0.0134301754, 0, 0, 0)
+					MainBar.Size = UDim2.new(0, target.Character.Humanoid.Health or 0, 0, 22)
+				end,
+				removeTargetHuds = function()
+					if #TargetHuds > 0 then
+						for i,v in pairs(TargetHuds) do
+							runfunc(function()
+								for i2,v2 in pairs(v:GetDescendants()) do
+									v2.Visible = false
+									v2:Remove()
+								end
+							end)
+						end
+						table.clear(TargetHuds)
+					end
+				end
+			}
+		end
+		local targetHudAPI = getTargetHudAPI()
 		local function attackEntity(entity,sword)
 			runfunc(function()
 				if getPriority(entity.UserId) > getPriority(lplr.UserId) then return end
@@ -1489,21 +1607,9 @@ if not betterShared(shared.Hazel_wareLoaded) then
 					["weapon"] = sword
 				})
 			end)
-			runfunc(function()
-				if modules.AuraAnimations.Toggled and IsFirstPerson() then
-					if not animrunning then
-						animrunning = true
-						local animtime = 0.3
-						CFrameAnimate(anim,animtime)
-						task.wait(animtime * #anim + 0.01)
-						animrunning = false
-						CFrameAnimate2()
-					end
-				else
-					events["SwordController"]:swingSwordAtMouse()
-				end
-			end)
+			targetHudAPI.removeTargetHuds()
 		end
+
 		modules.Aura = NewButton({
 			["Name"] = "Aura",
 			["Tab"] = "Combat",
@@ -1511,12 +1617,30 @@ if not betterShared(shared.Hazel_wareLoaded) then
 			["Function"] = function(enabled)
 				if enabled then
 					runfunc(function()
-						aurabind = game:GetService("RunService").RenderStepped:Connect(function()
-							task.wait(0.05)
+						aurabind = game:GetService("RunService").Heartbeat:Connect(function()
 							pcall(function()
 								local nearest = nearestUser(20)
 								if nearest ~= nil then
 									attackEntity(nearest,getBestWeapon())
+									if modules.TargetHud.Toggled then
+										targetHudAPI.drawToScreen(nearest)
+									end
+									runfunc(function()
+										if modules.AuraAnimations.Toggled and IsFirstPerson() then
+											if not animrunning then
+												animrunning = true
+												local animtime = 0.15
+												CFrameAnimate(anim,animtime)
+												task.wait(animtime * #anim + 0.01)
+												animrunning = false
+												CFrameAnimate2()
+											end
+										else
+											events["SwordController"]:swingSwordAtMouse()
+										end
+									end)
+								else
+									targetHudAPI.removeTargetHuds()
 								end
 							end)
 						end)
@@ -1821,7 +1945,11 @@ if not betterShared(shared.Hazel_wareLoaded) then
 									if not v.Character:FindFirstChild("Chams") then
 										local chams = Instance.new("Highlight",v.Character)
 										chams.Name = "Chams"
-										chams.FillColor = Color3.fromRGB(255, 0, 4)
+										if v.Team == lplr.Team then
+											chams.FillColor = Color3.fromRGB(68, 255, 0)
+										else
+											chams.FillColor = theme
+										end
 									end
 								end
 							end)
@@ -1856,21 +1984,20 @@ if not betterShared(shared.Hazel_wareLoaded) then
 					void.Material = Enum.Material.Neon
 					void.BrickColor = BrickColor.new("Royal purple")
 					local pos
-					local function getnewpos()
+					runfunc(function()
 						repeat task.wait(0.2)
 							if lplr.Character.Humanoid.FloorMaterial ~= Enum.Material.Air and lplr.Character.Humanoid.FloorMaterial ~= Enum.Material.Neon then
 								pos = lplr.Character.PrimaryPart.CFrame
 								pos += Vector3.new(0,6,0)
 							end
 						until not modules.Antivoid["Toggled"]
-					end
-					coroutine.wrap(getnewpos)()
+					end)
 					binds:BindPartToTouch(void,true,function()
 						if pos ~= nil and not modules.Flight.Toggled then
 							workspace.Gravity = 0
 							local tween = game:GetService("TweenService"):Create(lplr.Character.PrimaryPart,TweenInfo.new(0.2,Enum.EasingStyle.Exponential),{CFrame = pos})
 							tween:Play()
-							task.wait(0.3)
+							task.wait(0.2)
 							tween:Cancel()
 							workspace.Gravity = 196.2
 						end
@@ -1950,9 +2077,6 @@ if not betterShared(shared.Hazel_wareLoaded) then
 		function onGround()
 			return lplr.Character.Humanoid.FloorMaterial ~= Enum.Material.Air
 		end
-		local function getProperY(pos,y)
-			return CFrame.new(pos.X, pos.Y - y, pos.Z)
-		end
 		local spoofedCamera
 		local startLevel
 		modules.InfFlight = NewButton({
@@ -1974,11 +2098,11 @@ if not betterShared(shared.Hazel_wareLoaded) then
 						until not modules.InfFlight["Toggled"]
 					end)
 				else
-					spoofedCamera.CFrame += Vector3.new(0,150,0)
-					lplr.Character.PrimaryPart.CFrame = spoofedCamera.CFrame + Vector3.new(0,100,0)
+					lplr.Character.PrimaryPart.CFrame = spoofedCamera.CFrame + Vector3.new(0,5,0)
 					runfunc(function()
-						repeat task.wait() until onGround()
+						lplr.Character.PrimaryPart.Anchored = true
 						task.wait(0.1)
+						lplr.Character.PrimaryPart.Anchored = false
 						lplr.Character.PrimaryPart.CFrame -= Vector3.new(0,2,0)
 						setCamera(lplr.Character)
 						pcall(function()
@@ -2089,7 +2213,6 @@ if not betterShared(shared.Hazel_wareLoaded) then
 						local StartY = lplr.Character.PrimaryPart.Position.Y
 						events.PlacementCPS.BLOCK_PLACE_CPS = 2000
 						newvoid = Instance.new("Part")
-						workspace.Gravity = 0
 						newvoid.Transparency = 1
 						newvoid.Parent = workspace
 						newvoid.Anchored = true
@@ -2110,11 +2233,6 @@ if not betterShared(shared.Hazel_wareLoaded) then
 						for i = 1,10 do 
 							runfunc(function()
 								repeat task.wait()
-									if lplr.Character.Humanoid.FloorMaterial == Enum.Material.Air then
-										workspace.Gravity = 100
-									else
-										workspace.Gravity = 0
-									end
 									if not modules.Scaffold.Toggled then workspace.Gravity = 196.2 end
 									for i = 1,2 do 
 										game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged.PlaceBlock:InvokeServer({
@@ -2130,7 +2248,6 @@ if not betterShared(shared.Hazel_wareLoaded) then
 						pcall(function()
 							newvoid:Remove()
 						end)
-						workspace.Gravity = 196.2
 						pcall(function()
 							building_scaffold:Disconnect()
 						end)
