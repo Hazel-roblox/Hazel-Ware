@@ -1840,6 +1840,22 @@ if not betterShared(shared.Hazel_wareLoaded) then
 				end
 			end,
 		})
+		
+		modules.Disabler = NewButton({
+			["Name"] = "Disabler",
+			["Tab"] = "Utility",
+			["Function"] = function(enabled)
+				if enabled then
+					runfunc(function()
+						repeat task.wait()
+							local args = { [1] = { ["partPositions"] = { [1] = Vector3.new(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame), [2] = Vector3.new(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame), [3] = Vector3.new(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame), [4] = Vector3.new(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame), [5] = Vector3.new(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame), [6] = Vector3.new(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame), [7] = Vector3.new(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame) }, ["partSize"] = Vector3.new(999999, 0.5, 9999.99999999999999999999) } }
+							game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):WaitForChild("SpiritBridgeEnter"):InvokeServer(unpack(args))
+						until not modules.Disabler["Toggled"]
+					end)
+				end
+			end,
+		})
+		
 		modules.NoTextures = NewButton({
 			["Name"] = "NoTextures",
 			["Tab"] = "Render",
@@ -2127,7 +2143,7 @@ if not betterShared(shared.Hazel_wareLoaded) then
 	end)
 	shared.HazelWareFullyLoaded = true
 	local spawn_connection
-	spawn_connection = lplr.CharacterAdded:Connect(function() -- prevents modules breaking on spawn
+	spawn_connection = lplr.CharacterAdded:Connect(function()
 		task.wait(2)
 		if modules.Antivoid["Toggled"] then
 			modules.Antivoid:ToggleModule(false)
@@ -2147,4 +2163,3 @@ if not betterShared(shared.Hazel_wareLoaded) then
 		end
 	end)
 end
-Notify("To open GUI, press 'Delete',5)
