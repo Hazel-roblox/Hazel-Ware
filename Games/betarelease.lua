@@ -2147,3 +2147,4 @@ if not betterShared(shared.Hazel_wareLoaded) then
 		end
 	end)
 end
+Notify("To open GUI, press 'Delete',5)
