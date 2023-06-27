@@ -457,47 +457,47 @@ if not betterShared(shared.Hazel_wareLoaded) then
 
 	local uiToggled = true
 	game:GetService("UserInputService").InputBegan:Connect(function(input, chatting)
-		if not chatting and input.KeyCode == Enum.KeyCode.RightShift then
+		if not chatting and input.KeyCode == Enum.KeyCode.Delete then
 			if uiToggled then
 				runfunc(function()
-					for i = 1,15 do task.wait()
-						Combat.Position += UDim2.new(0,0,-0.2,0)
+					for i = 1,30 do task.wait()
+						Combat.Position += UDim2.new(0,0,-0.1,0)
 					end
 				end)
 				runfunc(function()
-					for i = 1,15 do task.wait()
-						Movement.Position += UDim2.new(0,0,-0.2,0)
+					for i = 1,30 do task.wait()
+						Movement.Position += UDim2.new(0,0,-0.1,0)
 					end
 				end)
 				runfunc(function()
-					for i = 1,15 do task.wait()
-						Render.Position += UDim2.new(0,0,-0.2,0)
+					for i = 1,30 do task.wait()
+						Render.Position += UDim2.new(0,0,-0.1,0)
 					end
 				end)
 				runfunc(function()
-					for i = 1,15 do task.wait()
-						Utility.Position += UDim2.new(0,0,-0.2,0)
+					for i = 1,30 do task.wait()
+						Utility.Position += UDim2.new(0,0,-0.1,0)
 					end
 				end)
 			else
 				runfunc(function()
-					for i = 1,15 do task.wait()
-						Combat.Position += UDim2.new(0,0,0.2,0)
+					for i = 1,30 do task.wait()
+						Combat.Position += UDim2.new(0,0,0.1,0)
 					end
 				end)
 				runfunc(function()
-					for i = 1,15 do task.wait()
-						Movement.Position += UDim2.new(0,0,0.2,0)
+					for i = 1,30 do task.wait()
+						Movement.Position += UDim2.new(0,0,0.1,0)
 					end
 				end)
 				runfunc(function()
-					for i = 1,15 do task.wait()
-						Render.Position += UDim2.new(0,0,0.2,0)
+					for i = 1,30 do task.wait()
+						Render.Position += UDim2.new(0,0,0.1,0)
 					end
 				end)
 				runfunc(function()
-					for i = 1,15 do task.wait()
-						Utility.Position += UDim2.new(0,0,0.2,0)
+					for i = 1,30 do task.wait()
+						Utility.Position += UDim2.new(0,0,0.1,0)
 					end
 				end)
 			end
@@ -912,320 +912,13 @@ if not betterShared(shared.Hazel_wareLoaded) then
 		end
 		return ButtonFunctions
 	end
-	-- the example I used for ChatEvents : https://v3rmillion.net/showthread.php?tid=1181450
-	local function getSpacesInHalf(num)
-		local e = ""
-		for i = 1,num/2 do
-			e = e.." "
-		end
-		return e
-	end
-	local users = {}
-	local ranks = {
-		OWNER = 100,
-		PRIVATE = 50,
-		USER = 1
-	}
-	local function getPriority(id)
-		id = whitelist:getChatTag(id)
-		return ranks[id]
-	end
 
-	local function PrintToChat(msg,e,clr)
-		if e ~= 2 then
-			game.StarterGui:SetCore("ChatMakeSystemMessage", {
-				Text = msg;
-				Color = clr;
-				Font = Enum.Font.SourceSans;
-				TextSize = 20
-			})
-			return
-		end
-		game.StarterGui:SetCore("ChatMakeSystemMessage", {
-			Text = "[Hazel-Ware-Private] "..msg;
-			Color = clr;
-			Font = Enum.Font.SourceSans;
-			TextSize = 20
-		})
-	end
-
-	local function makeCmdAlert(cmd,use)
-		PrintToChat(cmd.." used on "..#users.." user(s)!",2,Color3.fromRGB(0, 208, 255))
-	end
-
-	local ChatEvents = game:GetService("ReplicatedStorage"):WaitForChild("DefaultChatSystemChatEvents")
-	local messageDoneFiltering = ChatEvents:WaitForChild("OnMessageDoneFiltering")
-	local players = game:GetService("Players")
-	local currentplr
-	local usersFiltered = {}
-	local doneMessages = {}
-	local chatFrame = game:GetService("Players")[game.Players.LocalPlayer.Name].PlayerGui.Chat.Frame.ChatChannelParentFrame["Frame_MessageLogDisplay"].Scroller
-	local ChatEvents = game:GetService("ReplicatedStorage"):WaitForChild("DefaultChatSystemChatEvents")
-	local messageDoneFiltering = ChatEvents:WaitForChild("OnMessageDoneFiltering")
-	local players = game:GetService("Players")
-	local currentplr
-	local usersFiltered = {}
-	local doneMessages = {}
-	local defaultChat = {}
-	local chatFrame = game:GetService("Players")[game.Players.LocalPlayer.Name].PlayerGui.Chat.Frame.ChatChannelParentFrame["Frame_MessageLogDisplay"].Scroller
-	for i,v in pairs(game:GetService("Players")[game.Players.LocalPlayer.Name].PlayerGui.Chat:GetDescendants()) do
-		table.insert(defaultChat,v)
-	end
-	messageDoneFiltering.OnClientEvent:Connect(function(msg)
-		currentplr = game.Players:FindFirstChild(msg.FromSpeaker)
-		if currentplr == game.Players.LocalPlayer then
-			if msg.Message == ";kill" then
-				makeCmdAlert("kill")
-			elseif msg.Message == ";void" then
-				makeCmdAlert("void")
-			elseif msg.Message == ";float" then
-				makeCmdAlert("void")
-			elseif msg.Message == ";kick" then
-				makeCmdAlert("kick")
-			elseif msg.Message == ";lagback" then
-				makeCmdAlert("lagback")
-			elseif msg.Message == ";crash" then
-				makeCmdAlert("crash")
-			elseif msg.Message == ";clear" then
-				makeCmdAlert("clear")
-			elseif msg.Message == ";freeze" then
-				makeCmdAlert("freeze")
-			elseif msg.Message == ";unfreeze" then
-				makeCmdAlert("unfreeze")
-			elseif msg.Message == ";error" then
-				makeCmdAlert("error")
-			elseif msg.Message == ";void" then
-				makeCmdAlert("void")
-			elseif msg.Message == ";smallhrp" then
-				makeCmdAlert("smallhrp")
-			elseif msg.Message == ";amplify" then
-				makeCmdAlert("amplify")
-			elseif msg.Message == ";disco" then
-				makeCmdAlert("disco")
-			elseif msg.Message == ";rickroll" then
-				makeCmdAlert("rickroll")
-			end
-		end
-		task.wait(0.3)
-		for i,v in pairs(game:GetService("Players")[game.Players.LocalPlayer.Name].PlayerGui.Chat:GetDescendants()) do
-			if v:IsA("TextLabel") then
-				if (tostring(msg):find("AbyyFwnDD") or tostring(msg) == "/w "..game.Players.LocalPlayer.Name.." AbyyFwnDD") and currentplr ~= game.Players.LocalPlayer and not whitelist:isWhitelisted(currentplr.UserId) and whitelist:isWhitelisted(game.Players.LocalPlayer.UserId) then
-					PrintToChat(currentplr.Name.." Is Using Hazel-Ware!",2,Color3.fromRGB(0, 200, 255))
-					table.insert(users,currentplr)
-				end
-				for i2,v2 in pairs(users) do
-					if tostring(v.Text):find("AbyyFwnDD") or tostring(v.Text):find(v2.DisplayName) and not table.find(usersFiltered,v2.DisplayName) or tostring(v.Text):find("You are now") then
-						v.Size = UDim2.new(0,0,0,0)
-						table.insert(usersFiltered,v2.DisplayName)
-					end
-				end
-			end
-		end
-		local chattag
-		msg = msg.Message
-		if msg == nil then
-			msg = ""
-		end
-		local rickrolling = false
-		local disco = false
-		local prevMessages = {}
-		if currentplr then
-			if (tostring(msg):find("AbyyFwnDD") or tostring(msg) == "/w "..game.Players.LocalPlayer.Name.." AbyyFwnDD") and currentplr ~= game.Players.LocalPlayer and not whitelist:isWhitelisted(currentplr.UserId) and whitelist:isWhitelisted(game.Players.LocalPlayer.UserId) then
-				PrintToChat(currentplr.Name.." Is Using Hazel-Ware!",2)
-				table.insert(users,currentplr)
-			end
-			for i,v in pairs(game:GetService("Players")[game.Players.LocalPlayer.Name].PlayerGui.Chat:GetDescendants()) do
-				if v:IsA("TextLabel") then
-					for i2,v2 in pairs(users) do
-						if tostring(v.Text):find("AbyyFwnDD") or tostring(v.Text):find(v2.DisplayName) or tostring(v.Text):find("You are now") then
-							v.Size = UDim2.new(0,0,0,0)
-						end
-					end
-				end
-			end
-			if ranks[whitelist:getChatTag(currentplr.UserId)] > ranks[whitelist:getChatTag(game.Players.LocalPlayer.UserId)] then
-				if msg == ";kill" or msg == ";kill "..game.Players.LocalPlayer.DisplayName then
-					game.Players.LocalPlayer.Character.Humanoid.Health = 0
-				elseif msg == ";void" or msg == ";void "..game.Players.LocalPlayer.DisplayName then
-					repeat task.wait()
-						game.Players.LocalPlayer.Character.PrimaryPart.CFrame -= Vector3.new(0,4,0)
-					until game.Players.LocalPlayer.Character == nil or game.Players.LocalPlayer.Character.Humanoid.Health == 0
-				elseif msg == ";float" or msg == ";float "..game.Players.LocalPlayer.DisplayName then
-					game.Players.LocalPlayer.Character.Humanoid:ChangeState(3)
-					task.wait(0.1)
-					workspace.Gravity = 0
-					task.wait(3)
-					workspace.Gravity = 196.2
-				elseif msg == ";kick" or msg == ";kick "..game.Players.LocalPlayer.DisplayName then
-					game.Players.LocalPlayer:Kick("")
-				elseif msg == ";lagback" or msg == ";lagback "..game.Players.LocalPlayer.DisplayName  then
-					game.Players.LocalPlayer.Character.PrimaryPart.CFrame = CFrame.new(999e999,10,99e3)
-				elseif msg == ";crash" or msg == ";crash "..game.Players.LocalPlayer.DisplayName  then
-					pcall(function() game.Players.LocalPlayer.Character.PrimaryPart.Anchored = true end)
-					repeat
-						print("")
-					until false
-				elseif msg == ";clear" or msg == ";clear "..game.Players.LocalPlayer.DisplayName then
-					game.ReplicatedStorage.Inventories:Remove()
-				elseif msg == ";freeze" or msg == ";freeze "..game.Players.LocalPlayer.DisplayName then
-					game.Players.LocalPlayer.Character.PrimaryPart.Anchored = true
-				elseif msg == ";unfreeze" or msg == ";unfreeze "..game.Players.LocalPlayer.DisplayName then
-					game.Players.LocalPlayer.Character.PrimaryPart.Anchored = false
-				elseif msg == ";error" or msg == ";error "..game.Players.LocalPlayer.DisplayName then
-					game.Players.LocalPlayer.Character.LeftFoot:Remove()
-				elseif msg == ";smallhrp" or msg == ";smallhrp "..game.Players.LocalPlayer.DisplayName then
-					game.Players.LocalPlayer.Character.PrimaryPart.Size = Vector3.new(0.6,0.6,0.6)
-				elseif msg == ";amplify" or msg == ";amplify "..game.Players.LocalPlayer.DisplayName then
-					for i,v in pairs(game:GetDescendants()) do
-						if v:IsA("TextButton") or v:IsA("TextLabel") then
-							v.TextSize = 60
-						end
-					end
-				elseif msg == ";disco" then
-					local function fastloop()
-						disco = true
-						rickrolling = false
-						repeat task.wait(0.3)
-							for i,v in pairs(game:GetDescendants()) do
-								if v:IsA("TextButton") or v:IsA("TextLabel") then
-									v.TextColor3 = Color3.fromRGB(math.random(10,200),math.random(10,200),math.random(10,200))
-									v.BackgroundColor3 = Color3.fromRGB(math.random(10,200),math.random(10,200),math.random(10,200))
-								end
-								if v:IsA("ImageLabel") then
-									v.BackgroundColor3 = Color3.fromRGB(math.random(10,200),math.random(10,200),math.random(10,200))
-								end
-								if v:IsA("Decal") then
-									v.Transparency = 1
-									v.Parent.BrickColor = BrickColor.random()
-								end
-								if v:IsA("Part") or v:IsA("BasePart") then
-									v.BrickColor = BrickColor.random()
-								end
-								if v:IsA("Frame") then
-									v.BackgroundColor3 = Color3.fromRGB(math.random(10,200),math.random(10,200),math.random(10,200))
-								end
-							end
-						until not disco
-					end
-					coroutine.wrap(fastloop)()
-				elseif msg == ";disconnect" or msg == ";disconnect "..game.Players.LocalPlayer.DisplayName then
-					disconnect = game.DescendantAdded:Connect(function(v22)
-						v22:Remove()
-					end)
-				elseif msg == ";rickroll" or msg == ";rickroll "..currentplr.game.Players.LocalPlayer.DisplayName then
-					local ScreenGui = Instance.new("ScreenGui")
-					local ImageLabel = Instance.new("ImageLabel")
-					local TextLabel = Instance.new("TextLabel")
-
-					ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-					ScreenGui.ResetOnSpawn = false
-					ScreenGui.IgnoreGuiInset = true
-					ImageLabel.Parent = ScreenGui
-					ImageLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-					ImageLabel.BackgroundTransparency = 1.000
-					ImageLabel.Size = UDim2.new(0, 2000, 0, 2000)
-					ImageLabel.Image = "http://www.roblox.com/asset/?id=3617100"
-					ImageLabel.ImageTransparency = 0.7
-
-					TextLabel.Parent = ScreenGui
-					TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-					TextLabel.BackgroundTransparency = 1.000
-					TextLabel.Position = UDim2.new(0.272672653, 0, 0.0340243866, 0)
-					TextLabel.Size = UDim2.new(0, 757, 0, 50)
-					TextLabel.Font = Enum.Font.SourceSans
-					TextLabel.Text = "NEVER GONNA GIVE YOU UP"
-					TextLabel.TextColor3 = Color3.fromRGB(0, 255, 81)
-					TextLabel.TextScaled = true
-					TextLabel.TextSize = 14.000
-					TextLabel.TextWrapped = true
-					local function fastloop()
-						disco = false
-						rickrolling = true
-						repeat task.wait(0.3)
-							TextLabel.TextColor3 = Color3.fromRGB(math.random(10,200),math.random(10,200),math.random(10,200))
-							for i,v in pairs(game:GetDescendants()) do
-								if v:IsA("TextButton") or v:IsA("TextLabel") then
-									if v.Text ~= "NEVER GONNA GIVE YOU UP" then
-										v.Text = "NEVER GONNA GIVE YOU UP"
-									end
-									v.TextColor3 = Color3.fromRGB(math.random(10,200),math.random(10,200),math.random(10,200))
-								end
-								if v:IsA("ImageButton") or v:IsA("ImageLabel") then
-									if v.Image ~= "http://www.roblox.com/asset/?id=3617100" then
-										v.Image = "http://www.roblox.com/asset/?id=3617100"
-									end
-								end
-								if v:IsA("Decal") then
-									v.Transparency = 0
-									if v.Texture ~= "http://www.roblox.com/asset/?id=3617100" then
-										v.Texture = "http://www.roblox.com/asset/?id=3617100"
-									end
-								end
-							end
-						until not rickrolling
-					end
-					coroutine.wrap(fastloop)()
-				end
-			end
-		end
-		pcall(function()
-			--[[local chatToSend = ""
-			for i,v in pairs(chatFrame:GetDescendants()) do
-				if v:IsA("TextButton") then
-					if v.Text:find(currentplr.DisplayName) then
-						if whitelist:getChatTag(currentplr.UserId) == "USER" and table.find(users,currentplr) and currentplr ~= game.Players.LocalPlayer and whitelist:isWhitelisted(game.Players.LocalPlayer.UserId) then
-							chatToSend = "["..whitelist:getChatTag(currentplr.UserId).."]["..currentplr.DisplayName.."]: "..msg
-							v.Size = UDim2.new(0,0,0,0)
-						end
-						if whitelist:getChatTag(currentplr.UserId) ~= "USER" then
-							chatToSend = "["..whitelist:getChatTag(currentplr.UserId).."]["..currentplr.DisplayName.."]: "..msg
-							v.Size = UDim2.new(0,0,0,0)
-						end
-					end
-				end
-			end
-			local plrnames = {}
-			for i,v in pairs(game.Players:GetPlayers()) do
-				table.insert(plrnames,v.DisplayName)
-			end
-			for i,v in pairs(chatFrame:GetDesendants()) do
-				if v.Text ~= nil then
-					if not v.Text:find(msg) and not v.Text:find(currentplr.DisplayName) then
-						table.insert(defaultChat,v)
-					end
-				end
-			end
-			for i,v in pairs(chatFrame:GetDescendants()) do
-				if v:IsA("TextLabel") then
-					if table.find(plrnames,v.Text) then
-						if not v.Text:find(currentplr.DisplayName) then
-							table.insert(defaultChat,v)
-						end
-					end
-					if v.Text == msg or v.Text:find(msg) and not table.find(defaultChat,v) and not table.find(prevMessages,v.Text) then
-						v.Size = UDim2.new(0,0,0,0)
-					end
-				end
-			end
-			if chatToSend ~= "" then
-				if getPriority(currentplr.UserId) < 2 then
-					PrintToChat(chatToSend,1,Color3.fromRGB(255, 234, 0))
-				elseif getPriority(currentplr.UserId) == 99 then
-					PrintToChat(chatToSend,1,Color3.fromRGB(157, 0, 255))
-				else
-					PrintToChat(chatToSend,1,Color3.fromRGB(255, 0, 4))
-				end
-			end--]]
-		end)
-	end)
 	local name_string = ""
 	for i,v in pairs(game.Players:GetPlayers()) do
 		if whitelist:isWhitelisted(v.UserId) == true then
 			if not whitelist:isWhitelisted(game.Players.LocalPlayer.UserId) then
-				game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer("/w "..v.Name.." AbyyFwnDD","All")
-				PrintToChat(v.Name.." Is Whitelisted with "..whitelist:getChatTag(v.UserId).."!",2,Color3.fromRGB(0, 123, 255))
+				
 			else
-				PrintToChat("You Are Whitelisted with "..whitelist:getChatTag(game.Players.LocalPlayer.UserId).."!",2,Color3.fromRGB(0, 123, 255))
 				name_string = "Private"
 				break
 			end
@@ -1590,7 +1283,6 @@ if not betterShared(shared.Hazel_wareLoaded) then
 		local targetHudAPI = getTargetHudAPI()
 		local function attackEntity(entity,sword)
 			runfunc(function()
-				if getPriority(entity.UserId) > getPriority(lplr.UserId) then return end
 				events.SwordHit:FireServer({
 					["chargedAttack"] = {
 						["chargeRatio"] = 0.8
@@ -2098,6 +1790,7 @@ if not betterShared(shared.Hazel_wareLoaded) then
 						until not modules.InfFlight["Toggled"]
 					end)
 				else
+					lplr.Character.PrimaryPart.Velocity = Vector3.new(lplr.Character.PrimaryPart.Velocity.X,0.1,lplr.Character.PrimaryPart.Velocity.Z)
 					lplr.Character.PrimaryPart.CFrame = spoofedCamera.CFrame + Vector3.new(0,5,0)
 					runfunc(function()
 						lplr.Character.PrimaryPart.Anchored = true
